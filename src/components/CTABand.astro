@@ -1,0 +1,35 @@
+---
+import { PROJECT, formatPrice } from '../data/project';
+---
+
+<section class="relative overflow-hidden bg-terracotta">
+  <div class="container-wide section-pad relative z-10 grid gap-10 lg:grid-cols-2 lg:items-center">
+    <div>
+      <span class="label-tag-light border-white/40">Limited VIP Phase</span>
+      <h2 class="mt-6 font-display text-4xl font-semibold text-white sm:text-5xl lg:text-6xl">
+        Register for Hawthorne East Village VIP Access
+      </h2>
+      <p class="mt-5 max-w-lg text-base leading-relaxed text-white/85">
+        Priority pricing, floor plans, deposit schedules, and current incentives — delivered before the public launch in Milton.
+      </p>
+    </div>
+
+    <div class="border border-white/30 bg-white/10 p-8 backdrop-blur-sm sm:p-10">
+      <p class="text-[10px] font-bold uppercase tracking-[0.25em] text-white/80">From {formatPrice(PROJECT.priceRange.low)}</p>
+      <p class="mt-2 font-display text-3xl font-semibold text-white">
+        Two minutes. Zero obligation.
+      </p>
+      <p class="mt-3 text-sm text-white/75">
+        Submit your details and we'll send floor plans, the VIP price sheet, and deposit structure.
+      </p>
+      <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+        <a href="/register/" class="inline-flex min-h-12 flex-1 items-center justify-center bg-white px-8 py-3 text-xs font-bold uppercase tracking-[0.2em] text-terracotta transition-colors hover:bg-midnight hover:text-white">
+          VIP Registration
+        </a>
+        <a href="/prices/" class="inline-flex min-h-12 flex-1 items-center justify-center border-2 border-white px-8 py-3 text-xs font-bold uppercase tracking-[0.2em] text-white transition-colors hover:bg-white hover:text-terracotta">
+          See Prices
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

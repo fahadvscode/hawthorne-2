@@ -1,0 +1,110 @@
+---
+import '@fontsource/cormorant-garamond/500.css';
+import '@fontsource/cormorant-garamond/600.css';
+import '@fontsource/cormorant-garamond/700.css';
+import '@fontsource/dm-sans/400.css';
+import '@fontsource/dm-sans/500.css';
+import '@fontsource/dm-sans/600.css';
+import '@fontsource/dm-sans/700.css';
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import StickyMobileBar from '../components/StickyMobileBar.astro';
+import ExitIntent from '../components/ExitIntent.astro';
+import AnalyticsPlaceholder from '../components/AnalyticsPlaceholder.astro';
+import { SITE } from '../data/project';
+import {
+  organizationSchema,
+  websiteSchema,
+  listingSchema,
+} from '../utils/schema';
+
+interface Props {
+  title: string;
+  description: string;
+  path: string;
+  ogImage?: string;
+  noindex?: boolean;
+  schemas?: object[];
+}
+
+const {
+  title,
+  description,
+  path,
+  ogImage = '/images/1780773913252_hero_community_picture.webp',
+  noindex = false,
+  schemas = [],
+} = Astro.props;
+
+const canonicalClean =
+  path === '/' ? `${SITE.url}/` : `${SITE.url}${path.endsWith('/') ? path : `${path}/`}`;
+
+const fullOg = ogImage.startsWith('http') ? ogImage : `${SITE.url}${ogImage}`;
+
+const baseSchemas = [
+  organizationSchema(),
+  websiteSchema(),
+  listingSchema(),
+  ...schemas,
+];
+---
+
+<!doctype html>
+<html lang="en-CA">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    <link rel="canonical" href={canonicalClean} />
+    <link rel="alternate" hreflang="en-ca" href={canonicalClean} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalClean} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={fullOg} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="en_CA" />
+    <meta property="og:site_name" content={SITE.name} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={fullOg} />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="theme-color" content="#0B1220" />
+
+    <AnalyticsPlaceholder />
+
+    {
+      baseSchemas.map((schema, i) => (
+        <script
+          type="application/ld+json"
+          set:html={JSON.stringify(schema)}
+          id={`schema-${i}`}
+        />
+      ))
+    }
+  </head>
+  <body class="pb-20 md:pb-0">
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:bg-terracotta focus:px-4 focus:py-2 focus:text-white"
+    >
+      Skip to main content
+    </a>
+    <Header />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+    <StickyMobileBar />
+    <ExitIntent />
+  </body>
+</html>

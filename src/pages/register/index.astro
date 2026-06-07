@@ -1,0 +1,45 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import LeadForm from '../../components/LeadForm.astro';
+import { pages } from '../../data/seo';
+import { PROJECT, formatPrice } from '../../data/project';
+---
+
+<BaseLayout title={pages.register.title} description={pages.register.description} path={pages.register.path} ogImage={pages.register.ogImage}>
+  <section class="border-b border-stone-dark bg-midnight">
+    <div class="container-wide section-pad grid gap-16 lg:grid-cols-2">
+      <div class="text-white">
+        <span class="label-tag-light">Platinum VIP Access</span>
+        <h1 class="mt-6 display-h1 text-white">{pages.register.h1}</h1>
+        <p class="mt-6 max-w-lg text-white/70 leading-relaxed">
+          Priority access to Hawthorne East Village pricing, floor plans, deposit schedules, and incentives.
+        </p>
+        <div class="mt-10 grid grid-cols-3 gap-6 border-t border-white/15 pt-8">
+          <div>
+            <p class="text-[10px] font-bold uppercase tracking-[0.25em] text-terracotta">From</p>
+            <p class="mt-1 font-display text-3xl font-semibold">{formatPrice(PROJECT.priceRange.low)}</p>
+          </div>
+          <div>
+            <p class="text-[10px] font-bold uppercase tracking-[0.25em] text-terracotta">Sizes</p>
+            <p class="mt-1 font-display text-3xl font-semibold">{PROJECT.sizes.min.toLocaleString()}–{PROJECT.sizes.max.toLocaleString()}</p>
+          </div>
+          <div>
+            <p class="text-[10px] font-bold uppercase tracking-[0.25em] text-terracotta">Builder</p>
+            <p class="mt-1 font-display text-3xl font-semibold">Mattamy</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="border border-white/15 bg-midnight-soft p-8 sm:p-10">
+        <div class="border-l-4 border-terracotta pl-5 mb-8">
+          <p class="text-[10px] font-bold uppercase tracking-[0.25em] text-terracotta">Registration</p>
+          <h2 class="mt-2 font-display text-3xl font-semibold text-white">Complete Your VIP Form</h2>
+        </div>
+        <LeadForm id="register-form" variant="hero" formType="register" ctaLabel="Complete VIP Registration" />
+        <p class="mt-6 text-[10px] uppercase tracking-[0.15em] text-white/40 text-center">
+          We do not represent Mattamy Homes.
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

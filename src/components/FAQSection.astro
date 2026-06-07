@@ -1,0 +1,55 @@
+---
+import type { FAQ } from '../data/faqs';
+
+interface Props {
+  faqs: FAQ[];
+  heading?: string;
+  id?: string;
+}
+
+const { faqs, heading = 'Frequently Asked Questions', id = 'faq' } = Astro.props;
+---
+
+<section class="section-pad bg-stone" aria-labelledby={`${id}-heading`}>
+  <div class="container-wide">
+    <div class="mb-12 max-w-2xl">
+      <span class="section-num" aria-hidden="true">?</span>
+      <h2 id={`${id}-heading`} class="mt-2">{heading}</h2>
+    </div>
+
+    <div class="divide-y divide-stone-dark border-y border-stone-dark bg-snow">
+      {
+        faqs.map((faq, i) => (
+          <details class="faq-item group">
+            <summary class="flex cursor-pointer items-start gap-6 px-6 py-6 sm:px-8 sm:py-7">
+              <span class="faq-num mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center border border-stone-dark font-display text-sm font-semibold text-midnight transition-colors">
+                {String(i + 1).padStart(2, '0')}
+              </span>
+              <span class="flex-1 font-display text-xl font-semibold text-midnight sm:text-2xl">
+                {faq.question}
+              </span>
+              <span class="faq-chevron mt-2 shrink-0 text-terracotta transition-transform" aria-hidden="true">
+                <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              </span>
+            </summary>
+            <div class="border-t border-stone-dark px-6 pb-7 pl-20 pr-8 pt-4 text-slate leading-relaxed sm:px-8 sm:pl-[4.5rem]">
+              <p>{faq.answer}</p>
+            </div>
+          </details>
+        ))
+      }
+    </div>
+
+    <p class="mt-8">
+      <a href="/faq/" class="btn-ghost">View all FAQs</a>
+    </p>
+  </div>
+</section>
+
+<style>
+  details.faq-item[open] summary .faq-chevron {
+    transform: rotate(180deg);
+  }
+</style>

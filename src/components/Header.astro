@@ -1,0 +1,53 @@
+---
+const nav = [
+  { href: '/floor-plans/', label: 'Floor Plans' },
+  { href: '/prices/', label: 'Prices' },
+  { href: '/townhomes/', label: 'Townhomes' },
+  { href: '/detached/', label: 'Detached' },
+  { href: '/location/', label: 'Location' },
+  { href: '/faq/', label: 'FAQ' },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<header class="sticky top-0 z-50 border-b border-stone-dark bg-snow/95 backdrop-blur-sm">
+  <div class="container-wide grid grid-cols-[1fr_auto_1fr] items-center gap-4 px-5 py-5 sm:px-8">
+    <a href="/" class="flex items-center gap-3" aria-label="Hawthorne East Village Milton — Home">
+      <img
+        src="/images/1780773913252_Hawthrone-East-Village-logo.webp"
+        alt="Hawthorne East Village Milton Mattamy Homes logo"
+        class="h-10 w-auto object-contain"
+        width={40}
+        height={40}
+      />
+      <span class="hidden font-display text-xl font-semibold text-midnight sm:block">
+        Hawthorne East Village
+      </span>
+    </a>
+
+    <nav class="hidden items-center gap-8 lg:flex" aria-label="Main navigation">
+      {
+        nav.map((item) => (
+          <a
+            href={item.href}
+            class:list={[
+              'text-[11px] font-bold uppercase tracking-[0.2em] transition-colors',
+              currentPath.startsWith(item.href)
+                ? 'text-terracotta'
+                : 'text-slate hover:text-midnight',
+            ]}
+          >
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <div class="flex justify-end">
+      <a href="/register/" class="btn-gold text-[10px] px-5 py-2.5 sm:px-6">
+        VIP Access
+      </a>
+    </div>
+  </div>
+</header>

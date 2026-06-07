@@ -1,0 +1,64 @@
+---
+import { PROJECT, formatPrice } from '../data/project';
+---
+
+<section class="section-pad bg-snow" aria-labelledby="quick-facts-heading">
+  <div class="container-wide">
+    <div class="grid gap-12 lg:grid-cols-12 lg:gap-16">
+      <div class="lg:col-span-4">
+        <span class="section-num" aria-hidden="true">01</span>
+        <h2 id="quick-facts-heading" class="mt-4">
+          Hawthorne East Village — Quick Facts
+        </h2>
+        <p class="mt-5 prose-lead">
+          Everything you need to know about Mattamy Homes' newest Milton master-planned community.
+        </p>
+        <a href="/floor-plans/" class="btn-ghost mt-8">Explore floor plans</a>
+      </div>
+
+      <div class="lg:col-span-8">
+        <div class="grid gap-px bg-stone-dark sm:grid-cols-2">
+          <div class="bento-cell">
+            <p class="text-[10px] font-bold uppercase tracking-[0.25em] text-terracotta">Builder</p>
+            <p class="mt-3 font-display text-3xl font-semibold text-midnight">{PROJECT.builder}</p>
+          </div>
+          <div class="bento-cell">
+            <p class="text-[10px] font-bold uppercase tracking-[0.25em] text-terracotta">Location</p>
+            <p class="mt-3 font-display text-3xl font-semibold text-midnight">
+              {PROJECT.city}, {PROJECT.province}
+            </p>
+          </div>
+          <div class="bento-cell sm:col-span-2">
+            <p class="text-[10px] font-bold uppercase tracking-[0.25em] text-terracotta">Home Types</p>
+            <p class="mt-3 font-display text-2xl font-semibold text-midnight">
+              Village & rear lane townhomes · Detached single & double garage
+            </p>
+          </div>
+          <div class="bento-cell">
+            <p class="text-[10px] font-bold uppercase tracking-[0.25em] text-terracotta">Sizes</p>
+            <p class="mt-3 font-display text-3xl font-semibold text-midnight">
+              {PROJECT.sizes.min.toLocaleString()}–{PROJECT.sizes.max.toLocaleString()} {PROJECT.sizes.unit}
+            </p>
+          </div>
+          <div class="bento-cell bg-midnight text-white">
+            <p class="text-[10px] font-bold uppercase tracking-[0.25em] text-terracotta">Starting Price</p>
+            <p class="mt-3 font-display text-3xl font-semibold text-white">
+              {formatPrice(PROJECT.priceRange.low)}
+            </p>
+          </div>
+          <div class="bento-cell">
+            <p class="text-[10px] font-bold uppercase tracking-[0.25em] text-terracotta">Status</p>
+            <p class="mt-3 text-base font-medium text-slate">{PROJECT.status}</p>
+          </div>
+          <div class="bento-cell">
+            <p class="text-[10px] font-bold uppercase tracking-[0.25em] text-terracotta">Occupancy</p>
+            <p class="mt-3 text-base font-medium text-slate">{PROJECT.occupancy}</p>
+          </div>
+        </div>
+        <p class="mt-4 text-xs text-slate">
+          Last updated: {PROJECT.lastUpdated}. Pricing and availability subject to change. E&OE.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>

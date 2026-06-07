@@ -1,0 +1,25 @@
+---
+/**
+ * ANALYTICS PLACEHOLDERS — replace IDs before production launch
+ *
+ * Google Analytics 4:
+ *   <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+ *   gtag('config', 'G-XXXXXXXXXX');
+ *
+ * Google Tag Manager:
+ *   <!-- GTM head snippet --> + <!-- GTM body noscript -->
+ *
+ * Meta Pixel:
+ *   fbq('init', 'YOUR_PIXEL_ID');
+ */
+---
+
+<!-- GA4: uncomment and set G-XXXXXXXXXX
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script is:inline>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
+</script>
+-->

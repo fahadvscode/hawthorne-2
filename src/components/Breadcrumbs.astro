@@ -1,0 +1,39 @@
+---
+import { SITE } from '../data/project';
+import { breadcrumbSchema } from '../utils/schema';
+
+interface Crumb {
+  name: string;
+  path: string;
+}
+
+interface Props {
+  items: Crumb[];
+}
+
+const { items } = Astro.props;
+
+const schemaItems = [
+  { name: 'Home', url: `${SITE.url}/` },
+  ...items.map((i) => ({ name: i.name, url: `${SITE.url}${i.path}` })),
+];
+---
+
+<nav aria-label="Breadcrumb" class="mb-2 text-[10px] font-bold uppercase tracking-[0.2em] text-slate">
+  <ol class="flex flex-wrap items-center gap-2">
+    <li><a href="/" class="hover:text-terracotta">Home</a></li>
+    {
+      items.map((item, idx) => (
+        <li class="flex items-center gap-2">
+          <span aria-hidden="true">/</span>
+          {idx === items.length - 1 ? (
+            <span class="text-midnight" aria-current="page">{item.name}</span>
+          ) : (
+            <a href={item.path} class="hover:text-terracotta">{item.name}</a>
+          )}
+        </li>
+      ))
+    }
+  </ol>
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema(schemaItems))} />
+</nav>

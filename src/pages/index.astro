@@ -1,0 +1,206 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import QuickFacts from '../components/QuickFacts.astro';
+import HomeTypeCards from '../components/HomeTypeCards.astro';
+import FAQSection from '../components/FAQSection.astro';
+import CTABand from '../components/CTABand.astro';
+import TrustBar from '../components/TrustBar.astro';
+import GatedDownload from '../components/GatedDownload.astro';
+import { pages } from '../data/seo';
+import { homeFaqs } from '../data/faqs';
+import { PROJECT, formatPrice } from '../data/project';
+import { faqSchema } from '../utils/schema';
+
+const seo = pages.home;
+---
+
+<BaseLayout
+  title={seo.title}
+  description={seo.description}
+  path={seo.path}
+  ogImage={seo.ogImage}
+  schemas={[faqSchema(homeFaqs)]}
+>
+  <Hero
+    h1={seo.h1}
+    subtitle="New townhomes & detached homes by Mattamy Homes — register for VIP pricing, floor plans & incentives before public launch."
+  />
+
+  <TrustBar />
+
+  <!-- About — asymmetric split -->
+  <section class="section-pad bg-snow">
+    <div class="container-wide grid gap-16 lg:grid-cols-2">
+      <div>
+        <span class="section-num" aria-hidden="true">02</span>
+        <h2 class="mt-4">
+          New Pre-Construction Homes in Milton, Ontario by Mattamy
+        </h2>
+        <div class="mt-8 space-y-5 text-slate leading-relaxed">
+          <p class="prose-lead">
+            <strong class="text-midnight">Hawthorne East Village</strong> is a master-planned pre-construction
+            community by <strong class="text-midnight">Mattamy Homes</strong> in
+            <strong class="text-midnight">Milton, Ontario</strong> (Halton Region). The community offers freehold
+            village townhomes, common-element rear lane townhomes, and detached homes ranging from approximately
+            {PROJECT.sizes.min.toLocaleString()} to {PROJECT.sizes.max.toLocaleString()} square feet, with pricing
+            starting from {formatPrice(PROJECT.priceRange.low)}.
+          </p>
+          <p>
+            Located at {PROJECT.address.street}, Hawthorne East Village provides convenient access to Highway 401,
+            Highway 407, Milton GO Station, and Milton District Hospital. This site is independently marketed by
+            authorized real estate professionals to provide VIP buyer representation — we do not represent
+            Mattamy Homes.
+          </p>
+        </div>
+        <div class="mt-10 flex flex-wrap gap-4">
+          <a href="/floor-plans/" class="btn-outline">Floor Plans</a>
+          <a href="/register/" class="btn-gold">Register for VIP</a>
+        </div>
+      </div>
+
+      <div class="relative">
+        <img
+          src="/images/1780773913252_sitemap.jpg"
+          alt="Hawthorne East Village Milton site plan by Mattamy Homes"
+          width={800}
+          height={600}
+          loading="lazy"
+          class="w-full object-cover"
+        />
+        <div class="mt-0 border border-t-0 border-stone-dark bg-stone p-6">
+          <span class="label-tag">Site Plan</span>
+          <p class="mt-4 font-display text-2xl font-semibold text-midnight">Master-Planned Layout</p>
+          <p class="mt-2 text-sm text-slate">
+            Register for VIP access to view current lot availability and the latest community site plan.
+          </p>
+          <a href="/register/" class="btn-ghost mt-5">Get the latest site plan</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <QuickFacts />
+
+  <HomeTypeCards />
+
+  <!-- Pricing — full-width split -->
+  <section class="border-y border-stone-dark">
+    <div class="container-wide grid lg:grid-cols-2">
+      <div class="section-pad bg-midnight text-white lg:pr-16">
+        <span class="label-tag-light">Hawthorne East Village Prices</span>
+        <h2 class="mt-6 text-white">Transparent Pricing & Deposit Structure</h2>
+        <p class="mt-5 max-w-lg text-white/70 leading-relaxed">
+          Village townhomes from <strong class="text-white">{formatPrice(719990)}</strong>, detached homes from
+          <strong class="text-white">{formatPrice(1022990)}</strong>. View the full Milton pre-construction price
+          list, deposit schedules, and current VIP incentives.
+        </p>
+        <ul class="mt-8 space-y-4 border-t border-white/15 pt-8 text-sm text-white/70">
+          <li class="flex gap-4">
+            <span class="font-display text-2xl text-terracotta" aria-hidden="true">—</span>
+            Initial deposit on signing (phase-dependent)
+          </li>
+          <li class="flex gap-4">
+            <span class="font-display text-2xl text-terracotta" aria-hidden="true">—</span>
+            Additional installments during construction
+          </li>
+          <li class="flex gap-4">
+            <span class="font-display text-2xl text-terracotta" aria-hidden="true">—</span>
+            Balance on closing — confirmed at VIP registration
+          </li>
+        </ul>
+        <a href="/prices/" class="btn-ghost mt-10 border-white text-white hover:border-terracotta hover:text-terracotta">
+          See full price list
+        </a>
+      </div>
+
+      <div class="section-pad flex flex-col justify-center bg-stone lg:pl-16">
+        <span class="label-tag">Instant Download</span>
+        <h3 class="mt-5 font-display text-3xl font-semibold text-midnight">
+          Hawthorne East Village Price List
+        </h3>
+        <p class="mt-4 text-sm text-slate">
+          Submit your details and receive the VIP price sheet, deposit structure, and current incentives by email.
+        </p>
+        <div class="mt-8">
+          <GatedDownload
+            buttonLabel="Download Price List"
+            modalTitle="Download Hawthorne East Village Price List"
+            formType="price-list"
+          />
+        </div>
+        <p class="mt-4 text-[11px] text-slate">
+          *Pricing subject to change. E&OE. Last updated {PROJECT.lastUpdated}.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Location -->
+  <section class="section-pad bg-snow">
+    <div class="container-wide">
+      <div class="grid gap-16 lg:grid-cols-12">
+        <div class="lg:col-span-4">
+          <span class="section-num" aria-hidden="true">03</span>
+          <h2 class="mt-4">Live in One of Milton's Fastest-Growing Corridors</h2>
+          <p class="mt-5 prose-lead">
+            Hawthorne East Village sits in one of Milton's high-growth corridors — minutes from top-rated Halton
+            schools, GO Transit, and the planned Milton Education Village.
+          </p>
+          <a href="/location/" class="btn-ghost mt-8">Location guide</a>
+        </div>
+        <div class="lg:col-span-8">
+          <ul class="grid gap-px bg-stone-dark sm:grid-cols-2">
+            {
+              PROJECT.amenities.map((a) => (
+                <li class="bg-snow px-6 py-5 text-sm text-slate">
+                  <span class="mr-2 font-display text-lg text-terracotta" aria-hidden="true">—</span>
+                  {a}
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Schools + Investment -->
+  <section class="border-t border-stone-dark bg-stone">
+    <div class="container-wide grid lg:grid-cols-2">
+      <div class="section-pad border-b border-stone-dark lg:border-b-0 lg:border-r">
+        <span class="label-tag">Schools</span>
+        <h3 class="mt-5 font-display text-3xl font-semibold text-midnight">
+          Top-Rated Halton Schools Nearby
+        </h3>
+        <ul class="mt-8 space-y-4 text-sm text-slate">
+          {
+            PROJECT.schools.map((s) => (
+              <li class="flex gap-4 border-b border-stone-dark pb-4">
+                <span class="font-display text-xl text-terracotta" aria-hidden="true">—</span>
+                <span>{s}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+      <div class="section-pad bg-midnight text-white">
+        <span class="label-tag-light">Investment Outlook</span>
+        <h3 class="mt-5 font-display text-3xl font-semibold text-white">
+          Why Invest in Milton Pre-Construction?
+        </h3>
+        <p class="mt-6 leading-relaxed text-white/70">
+          Halton Region is projected toward approximately 1.1 million residents, with Milton among the
+          fastest-growing GTA municipalities. The Toronto–Waterloo innovation corridor, Milton Education Village,
+          and major highway infrastructure support long-term housing demand. Pre-construction at Hawthorne East
+          Village may offer preferential pricing and deposit structures compared to resale — register for details
+          specific to your situation.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <FAQSection faqs={homeFaqs} heading="Hawthorne East Village — Top Questions" />
+
+  <CTABand />
+</BaseLayout>

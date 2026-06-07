@@ -1,0 +1,7 @@
+# Netlify domain-level 301s (configure in Netlify UI → Domain management):
+#   hawthorneeastvillage.com      → https://hawthorneeastvillagemilton.com
+#   www.hawthorneeastvillage.com  → https://hawthorneeastvillagemilton.com
+#   hawthroneeast-village.com     → https://hawthorneeastvillagemilton.com
+#   www.hawthroneeast-village.com → https://hawthorneeastvillagemilton.com
+#
+# See README.md and vercel.json for Vercel host-based redirect rules.

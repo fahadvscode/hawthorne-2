@@ -1,0 +1,21 @@
+---
+import GatedCTA from './GatedCTA.astro';
+import LeadForm from './LeadForm.astro';
+
+interface Props {
+  buttonLabel: string;
+  modalTitle: string;
+  formType: string;
+}
+
+const { buttonLabel, modalTitle, formType } = Astro.props;
+---
+
+<GatedCTA label={buttonLabel} modalTitle={modalTitle} formType={formType}>
+  <LeadForm
+    id={`form-${formType}`}
+    variant="inline"
+    formType={formType}
+    ctaLabel="Send My VIP Package"
+  />
+</GatedCTA>

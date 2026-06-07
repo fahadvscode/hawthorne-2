@@ -1,0 +1,90 @@
+---
+import LeadForm from './LeadForm.astro';
+import { PROJECT, formatPrice } from '../data/project';
+
+interface Props {
+  h1: string;
+  subtitle: string;
+  showForm?: boolean;
+}
+
+const { h1, subtitle, showForm = true } = Astro.props;
+---
+
+<section class="relative min-h-[100svh] bg-midnight">
+  <!-- Full-bleed background image -->
+  <div class="absolute inset-0 lg:right-[420px]" aria-hidden="true">
+    <img
+      src="/images/1780773913252_hero_community_picture.webp"
+      alt="Hawthorne East Village Milton new home community by Mattamy Homes pre-construction"
+      width={1920}
+      height={1080}
+      loading="eager"
+      fetchpriority="high"
+      decoding="async"
+      class="h-full w-full object-cover"
+    />
+    <div class="absolute inset-0 bg-gradient-to-t from-midnight via-midnight/30 to-midnight/10 lg:bg-gradient-to-r lg:from-transparent lg:via-midnight/20 lg:to-midnight/60"></div>
+  </div>
+
+  <div class="relative z-10 flex min-h-[100svh] flex-col lg:flex-row">
+    <!-- Left: headline anchored to bottom -->
+    <div class="flex flex-1 flex-col justify-end px-5 pb-10 pt-28 sm:px-8 sm:pb-14 lg:px-12 lg:pb-16">
+      <span class="label-tag-light mb-6 w-fit">Pre-Construction · Milton, ON</span>
+
+      <h1 class="display-h1 max-w-4xl text-white">
+        {h1}
+      </h1>
+
+      <p class="mt-6 max-w-xl text-base leading-relaxed text-white/75 sm:text-lg">
+        {subtitle}
+      </p>
+
+      <div class="mt-10 flex flex-wrap gap-8 border-t border-white/20 pt-8">
+        <div>
+          <p class="text-[10px] font-bold uppercase tracking-[0.25em] text-terracotta">Starting</p>
+          <p class="mt-1 font-display text-4xl font-semibold text-white">{formatPrice(PROJECT.priceRange.low)}</p>
+        </div>
+        <div>
+          <p class="text-[10px] font-bold uppercase tracking-[0.25em] text-terracotta">Sizes</p>
+          <p class="mt-1 font-display text-4xl font-semibold text-white">
+            {PROJECT.sizes.min.toLocaleString()}–{PROJECT.sizes.max.toLocaleString()}
+            <span class="text-lg text-white/60"> sq ft</span>
+          </p>
+        </div>
+        <div>
+          <p class="text-[10px] font-bold uppercase tracking-[0.25em] text-terracotta">Builder</p>
+          <p class="mt-1 font-display text-4xl font-semibold text-white">Mattamy</p>
+        </div>
+      </div>
+
+      {
+        !showForm && (
+          <a href="/register/" class="btn-gold mt-10 w-fit">
+            Get VIP Pricing & Floor Plans
+          </a>
+        )
+      }
+    </div>
+
+    <!-- Right: dark form sidebar panel -->
+    {
+      showForm && (
+        <aside class="w-full border-t border-white/10 bg-midnight-soft lg:w-[420px] lg:shrink-0 lg:border-l lg:border-t-0">
+          <div class="flex h-full flex-col justify-center px-6 py-10 sm:px-8 lg:py-0">
+            <div class="mb-8 border-l-4 border-terracotta pl-5">
+              <p class="text-[10px] font-bold uppercase tracking-[0.25em] text-terracotta">VIP Registration</p>
+              <h2 class="mt-2 font-display text-3xl font-semibold text-white">
+                Floor Plans & Pricing
+              </h2>
+              <p class="mt-2 text-sm text-white/60">Delivered to your inbox instantly.</p>
+            </div>
+            <LeadForm id="hero-form" variant="hero" formType="hero" />
+          </div>
+        </aside>
+      )
+    }
+  </div>
+</section>
+
+<link rel="preload" as="image" href="/images/1780773913252_hero_community_picture.webp" type="image/webp" fetchpriority="high" />

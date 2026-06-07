@@ -1,0 +1,96 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import FAQSection from '../../components/FAQSection.astro';
+import CTABand from '../../components/CTABand.astro';
+import GatedDownload from '../../components/GatedDownload.astro';
+import { pages } from '../../data/seo';
+import { priceFaqs } from '../../data/faqs';
+import { PROJECT, formatPrice } from '../../data/project';
+import { faqSchema, productOffersSchema } from '../../utils/schema';
+
+const seo = pages.prices;
+---
+
+<BaseLayout
+  title={seo.title}
+  description={seo.description}
+  path={seo.path}
+  ogImage={seo.ogImage}
+  schemas={[faqSchema(priceFaqs), ...productOffersSchema()]}
+>
+  <PageHero
+    h1={seo.h1}
+    tag="VIP Price List · Milton"
+    num="$"
+    crumbs={[{ name: 'Prices', path: '/prices/' }]}
+    description={`Hawthorne East Village prices start from approximately ${formatPrice(PROJECT.priceRange.low)} for village townhomes and ${formatPrice(1022990)} for detached homes, up to approximately ${formatPrice(PROJECT.priceRange.high)} for select larger models. Last updated ${PROJECT.lastUpdated}.`}
+  />
+
+  <section class="section-pad">
+    <div class="container-narrow">
+      <h2 class="mb-6 text-2xl text-forest-dark">Price Table by Home Type</h2>
+      <div class="overflow-x-auto rounded-lg border border-forest-mid/20 bg-white">
+        <table class="w-full min-w-[480px] text-left text-sm">
+          <thead class="bg-forest-dark text-cream">
+            <tr>
+              <th class="px-4 py-3">Home Type</th>
+              <th class="px-4 py-3">Size (approx.)</th>
+              <th class="px-4 py-3">Starting From*</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-forest-mid/10">
+            {
+              PROJECT.homeTypes.map((ht, i) => (
+                <tr class:list={[i % 2 === 0 && 'bg-cream/30']}>
+                  <td class="px-4 py-3 font-medium">{ht.name}</td>
+                  <td class="px-4 py-3">
+                    {ht.sizeMin.toLocaleString()} – {ht.sizeMax.toLocaleString()} sq ft
+                  </td>
+                  <td class="px-4 py-3 font-semibold text-forest-accent">
+                    {formatPrice(ht.priceFrom)}
+                  </td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+      <p class="mt-3 text-xs text-forest-mid">*Starting from, subject to change without notice. E&OE.</p>
+
+      <div class="mt-10 flex flex-wrap gap-4">
+        <GatedDownload
+          buttonLabel="Download Full Price List"
+          modalTitle="Hawthorne East Village VIP Price List"
+          formType="full-price-list"
+        />
+        <a href="/register/" class="btn-outline">VIP Registration</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-pad bg-white">
+    <div class="container-narrow max-w-3xl">
+      <h2 class="mb-4 text-2xl text-forest-dark">Deposit Structure</h2>
+      <p class="text-forest-mid leading-relaxed">{PROJECT.deposit.summary}</p>
+      <ul class="mt-4 list-disc space-y-2 pl-6 text-forest-mid">
+        {PROJECT.deposit.typical.map((d) => <li>{d}</li>)}
+      </ul>
+      <p class="mt-4 text-sm">
+        <a href="/register/" class="font-semibold text-forest-accent hover:underline">
+          Register for your phase-specific deposit schedule →
+        </a>
+      </p>
+    </div>
+  </section>
+
+  <section class="section-pad">
+    <div class="container-narrow max-w-3xl">
+      <h2 class="mb-4 text-2xl text-forest-dark">Current Incentives</h2>
+      <p class="text-forest-mid leading-relaxed">{PROJECT.incentives}</p>
+    </div>
+  </section>
+
+  <FAQSection faqs={priceFaqs} heading="Hawthorne East Village Pricing FAQ" id="prices-faq" />
+  <CTABand />
+</BaseLayout>

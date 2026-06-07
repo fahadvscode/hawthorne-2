@@ -1,0 +1,72 @@
+---
+import { CONTACT, DISCLAIMER, PROJECT } from '../data/project';
+
+const explore = [
+  { href: '/', label: 'Home' },
+  { href: '/floor-plans/', label: 'Floor Plans' },
+  { href: '/prices/', label: 'Prices & Deposits' },
+  { href: '/location/', label: 'Location' },
+  { href: '/faq/', label: 'FAQ' },
+  { href: '/register/', label: 'VIP Registration' },
+];
+
+const homeTypes = [
+  { href: '/townhomes/', label: 'Village Townhomes' },
+  { href: '/townhomes/', label: 'Rear Lane Townhomes' },
+  { href: '/detached/', label: 'Detached Homes' },
+];
+---
+
+<footer class="bg-midnight text-white/70">
+  <div class="container-wide section-pad">
+    <div class="grid gap-12 border-b border-white/10 pb-12 lg:grid-cols-12">
+      <div class="lg:col-span-5">
+        <p class="font-display text-4xl font-semibold text-white">{PROJECT.name}</p>
+        <p class="mt-2 text-[10px] font-bold uppercase tracking-[0.25em] text-terracotta">
+          {PROJECT.city}, {PROJECT.province} · Pre-Construction
+        </p>
+        <p class="mt-6 max-w-sm text-sm leading-relaxed">
+          A master-planned new home community by {PROJECT.builder}. Independently marketed by authorized real estate professionals.
+        </p>
+      </div>
+
+      <div class="lg:col-span-3">
+        <p class="mb-5 text-[10px] font-bold uppercase tracking-[0.25em] text-terracotta">Explore</p>
+        <ul class="space-y-3 text-sm">
+          {explore.map((link) => (
+            <li>
+              <a href={link.href} class="transition-colors hover:text-terracotta">{link.label}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="lg:col-span-2">
+        <p class="mb-5 text-[10px] font-bold uppercase tracking-[0.25em] text-terracotta">Home Types</p>
+        <ul class="space-y-3 text-sm">
+          {homeTypes.map((link) => (
+            <li>
+              <a href={link.href} class="transition-colors hover:text-terracotta">{link.label}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="lg:col-span-2">
+        <p class="mb-5 text-[10px] font-bold uppercase tracking-[0.25em] text-terracotta">Contact</p>
+        <address class="not-italic text-sm leading-relaxed">
+          <p class="font-semibold text-white">{CONTACT.name}</p>
+          <p class="mt-1">{CONTACT.brokerage}</p>
+          <p>{CONTACT.address}</p>
+        </address>
+        <a href="/register/" class="btn-gold mt-6 text-[10px]">Register</a>
+      </div>
+    </div>
+
+    <div class="pt-8 text-xs leading-relaxed text-white/50">
+      <p>{DISCLAIMER.preliminary}</p>
+      <p class="mt-2 font-semibold text-white/70">{DISCLAIMER.notOfficial}</p>
+      <p class="mt-4">© {new Date().getFullYear()} {CONTACT.name}. All rights reserved.</p>
+    </div>
+  </div>
+</footer>

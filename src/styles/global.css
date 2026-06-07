@@ -1,0 +1,175 @@
+@import "tailwindcss";
+
+@theme {
+  /* Architectural Luxe — midnight + terracotta + serif */
+  --color-midnight: #0B1220;
+  --color-midnight-soft: #151D2E;
+  --color-snow: #FAFAF8;
+  --color-stone: #EDEBE6;
+  --color-stone-dark: #D8D4CC;
+  --color-terracotta: #C45C3B;
+  --color-terracotta-dark: #A34A2E;
+  --color-brass: #8B7355;
+  --color-charcoal: #1A1A1A;
+  --color-slate: #64748B;
+  --color-line: #D8D4CC;
+
+  /* Legacy aliases — inner pages keep working */
+  --color-emerald-deep: #0B1220;
+  --color-emerald: #1A1A1A;
+  --color-emerald-soft: #EDEBE6;
+  --color-copper: #C45C3B;
+  --color-copper-dark: #A34A2E;
+  --color-copper-soft: #F5E8E3;
+  --color-ivory: #FAFAF8;
+  --color-sand: #EDEBE6;
+  --color-ink: #1A1A1A;
+  --color-ink-soft: #64748B;
+  --color-forest-dark: #0B1220;
+  --color-forest-mid: #64748B;
+  --color-forest-accent: #C45C3B;
+  --color-gold: #C45C3B;
+  --color-gold-alt: #A34A2E;
+  --color-cream: #FAFAF8;
+
+  --font-display: "Cormorant Garamond", "Georgia", serif;
+  --font-body: "DM Sans", system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-snow font-body text-charcoal antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display font-semibold text-midnight;
+    letter-spacing: -0.01em;
+  }
+
+  h2 {
+    @apply text-4xl sm:text-5xl leading-[1.1];
+  }
+
+  h3 {
+    @apply text-2xl sm:text-3xl;
+  }
+
+  ::selection {
+    background: var(--color-terracotta);
+    color: #fff;
+  }
+}
+
+@layer components {
+  .btn-gold,
+  .btn-primary {
+    @apply inline-flex min-h-12 min-w-[44px] items-center justify-center bg-terracotta px-8 py-3 text-xs font-bold uppercase tracking-[0.2em] text-white transition-colors hover:bg-terracotta-dark focus:outline-none focus-visible:ring-2 focus-visible:ring-terracotta focus-visible:ring-offset-2;
+  }
+
+  .btn-outline {
+    @apply inline-flex min-h-12 min-w-[44px] items-center justify-center border-2 border-midnight bg-transparent px-8 py-3 text-xs font-bold uppercase tracking-[0.2em] text-midnight transition-colors hover:bg-midnight hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-midnight;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center gap-2 border-b-2 border-terracotta pb-0.5 text-xs font-bold uppercase tracking-[0.2em] text-midnight transition-colors hover:border-midnight hover:text-terracotta;
+  }
+
+  .input-field {
+    @apply w-full border-0 border-b-2 border-stone-dark bg-transparent px-0 py-3 text-base text-charcoal placeholder:text-slate/70 transition-colors focus:border-terracotta focus:outline-none focus:ring-0;
+  }
+
+  .input-field-dark {
+    @apply border-white/30 text-white placeholder:text-white/40 focus:border-terracotta;
+  }
+
+  .section-pad {
+    @apply px-5 py-24 sm:px-8 lg:px-12 lg:py-32;
+  }
+
+  .container-narrow {
+    @apply mx-auto max-w-6xl;
+  }
+
+  .container-wide {
+    @apply mx-auto max-w-[1400px];
+  }
+
+  .prose-lead {
+    @apply text-lg leading-relaxed text-slate;
+  }
+
+  .section-num {
+    @apply font-display text-7xl font-light leading-none text-stone-dark sm:text-8xl;
+  }
+
+  .label-tag {
+    @apply inline-block border border-midnight px-3 py-1 text-[10px] font-bold uppercase tracking-[0.25em] text-midnight;
+  }
+
+  .label-tag-light {
+    @apply inline-block border border-white/40 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.25em] text-white/90;
+  }
+
+  .display-h1 {
+    @apply font-display text-5xl font-semibold leading-[0.95] tracking-tight sm:text-6xl lg:text-7xl xl:text-8xl;
+  }
+
+  .display-h1 em {
+    @apply not-italic text-terracotta;
+  }
+
+  .card-elevated {
+    @apply border border-stone-dark bg-white;
+  }
+
+  .card-soft {
+    @apply border border-stone-dark bg-stone/50;
+  }
+
+  /* Horizontal scroll strip */
+  .scroll-strip {
+    @apply flex gap-5 overflow-x-auto pb-4 snap-x snap-mandatory;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-stone-dark) transparent;
+  }
+
+  .scroll-strip > * {
+    @apply snap-start shrink-0;
+  }
+
+  /* Bento cell */
+  .bento-cell {
+    @apply border border-stone-dark bg-white p-6 sm:p-8;
+  }
+
+  /* Legacy eyebrow aliases */
+  .eyebrow,
+  .eyebrow-emerald {
+    @apply inline-block border border-midnight px-3 py-1 text-[10px] font-bold uppercase tracking-[0.25em] text-midnight mb-4;
+  }
+}
+
+/* FAQ */
+details.faq-item summary {
+  list-style: none;
+  cursor: pointer;
+}
+
+details.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+details.faq-item[open] summary {
+  @apply bg-stone;
+}
+
+details.faq-item[open] summary .faq-num {
+  @apply bg-terracotta text-white;
+}

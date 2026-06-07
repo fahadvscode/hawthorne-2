@@ -1,0 +1,29 @@
+---
+import Breadcrumbs from './Breadcrumbs.astro';
+
+interface Props {
+  h1: string;
+  description: string;
+  tag: string;
+  num?: string;
+  crumbs: { name: string; path: string }[];
+}
+
+const { h1, description, tag, num = '—', crumbs } = Astro.props;
+---
+
+<section class="border-b border-stone-dark bg-stone">
+  <div class="container-wide section-pad">
+    <Breadcrumbs items={crumbs} />
+    <div class="mt-8 grid gap-10 lg:grid-cols-12 lg:items-end">
+      <div class="lg:col-span-8">
+        <span class="label-tag">{tag}</span>
+        <h1 class="mt-6 display-h1 text-midnight">{h1}</h1>
+        <p class="mt-6 max-w-2xl text-lg leading-relaxed text-slate">{description}</p>
+      </div>
+      <div class="hidden text-right lg:col-span-4 lg:block">
+        <span class="section-num" aria-hidden="true">{num}</span>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,28 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import FAQSection from '../../components/FAQSection.astro';
+import CTABand from '../../components/CTABand.astro';
+import { pages } from '../../data/seo';
+import { allFaqs } from '../../data/faqs';
+import { faqSchema } from '../../utils/schema';
+---
+
+<BaseLayout
+  title={pages.faq.title}
+  description={pages.faq.description}
+  path={pages.faq.path}
+  ogImage={pages.faq.ogImage}
+  schemas={[faqSchema(allFaqs)]}
+>
+  <PageHero
+    h1={pages.faq.h1}
+    tag="Hawthorne East Village · Milton"
+    num="?"
+    crumbs={[{ name: 'FAQ', path: '/faq/' }]}
+    description="Answers to the most common questions about Hawthorne East Village Milton — prices, deposits, schools, VIP registration, and more."
+  />
+
+  <FAQSection faqs={allFaqs} heading="All Questions" id="full-faq" />
+  <CTABand />
+</BaseLayout>

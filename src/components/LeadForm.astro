@@ -1,0 +1,269 @@
+---
+interface Props {
+  id?: string;
+  variant?: 'hero' | 'modal' | 'register' | 'inline';
+  formType?: string;
+  ctaLabel?: string;
+}
+
+const {
+  id = 'lead-form',
+  variant = 'hero',
+  formType = 'hero',
+  ctaLabel = 'Get VIP Pricing & Floor Plans',
+} = Astro.props;
+
+const isDark = variant === 'hero';
+
+const formClass =
+  variant === 'hero'
+    ? 'space-y-5'
+    : variant === 'register'
+      ? 'mx-auto max-w-lg space-y-5'
+      : 'space-y-5';
+
+const labelClass = isDark
+  ? 'mb-1 block text-[10px] font-bold uppercase tracking-[0.2em] text-white/70'
+  : 'mb-1 block text-[10px] font-bold uppercase tracking-[0.2em] text-midnight';
+
+const inputClass = isDark ? 'input-field input-field-dark' : 'input-field';
+
+const fieldsetClass = isDark ? 'text-white/80' : 'text-midnight';
+
+const radioLabelClass = isDark
+  ? 'flex cursor-pointer items-center gap-2 text-sm text-white/80'
+  : 'flex cursor-pointer items-center gap-2 text-sm text-midnight';
+---
+
+<form
+  id={id}
+  class={formClass}
+  novalidate
+  data-lead-form
+  data-form-type={formType}
+>
+  <div class="grid gap-5 sm:grid-cols-2">
+    <div>
+      <label for={`${id}-first`} class={labelClass}>
+        First name <span class="text-terracotta">*</span>
+      </label>
+      <input
+        type="text"
+        id={`${id}-first`}
+        name="firstName"
+        required
+        autocomplete="given-name"
+        class={inputClass}
+        aria-describedby={`${id}-first-error`}
+      />
+      <p id={`${id}-first-error`} class="mt-1 hidden text-sm text-red-400" role="alert"></p>
+    </div>
+    <div>
+      <label for={`${id}-last`} class={labelClass}>
+        Last name <span class="text-terracotta">*</span>
+      </label>
+      <input
+        type="text"
+        id={`${id}-last`}
+        name="lastName"
+        required
+        autocomplete="family-name"
+        class={inputClass}
+        aria-describedby={`${id}-last-error`}
+      />
+      <p id={`${id}-last-error`} class="mt-1 hidden text-sm text-red-400" role="alert"></p>
+    </div>
+  </div>
+
+  <div>
+    <label for={`${id}-email`} class={labelClass}>
+      Email <span class="text-terracotta">*</span>
+    </label>
+    <input
+      type="email"
+      id={`${id}-email`}
+      name="email"
+      required
+      autocomplete="email"
+      class={inputClass}
+      aria-describedby={`${id}-email-error`}
+    />
+    <p id={`${id}-email-error`} class="mt-1 hidden text-sm text-red-400" role="alert"></p>
+  </div>
+
+  <div>
+    <label for={`${id}-phone`} class={labelClass}>
+      Phone <span class="text-terracotta">*</span>
+    </label>
+    <input
+      type="tel"
+      id={`${id}-phone`}
+      name="phone"
+      required
+      autocomplete="tel"
+      placeholder="647-555-1234"
+      class={inputClass}
+      aria-describedby={`${id}-phone-error`}
+    />
+    <p id={`${id}-phone-error`} class="mt-1 hidden text-sm text-red-400" role="alert"></p>
+  </div>
+
+  <fieldset class={fieldsetClass} aria-describedby={`${id}-broker-error`}>
+    <legend class:list={['mb-3', labelClass]}>
+      Are you a broker? <span class="text-terracotta">*</span>
+    </legend>
+    <div class="flex gap-8 text-sm">
+      <label class={radioLabelClass}>
+        <input type="radio" name="isBroker" value="Yes" required class="h-4 w-4 accent-terracotta" />
+        <span>Yes</span>
+      </label>
+      <label class={radioLabelClass}>
+        <input type="radio" name="isBroker" value="No" required class="h-4 w-4 accent-terracotta" />
+        <span>No</span>
+      </label>
+    </div>
+    <p id={`${id}-broker-error`} class="mt-1 hidden text-sm text-red-400" role="alert"></p>
+  </fieldset>
+
+  <p
+    id={`${id}-form-error`}
+    class="hidden rounded-md bg-red-50 px-3 py-2 text-sm text-red-800"
+    role="alert"
+  >
+  </p>
+
+  <button type="submit" class="btn-gold w-full" data-submit-btn>
+    <span data-submit-text>{ctaLabel}</span>
+    <span data-submit-loading class="hidden">Sending…</span>
+  </button>
+
+  {
+    variant === 'hero' && (
+      <p class="text-center text-[10px] uppercase tracking-[0.15em] text-white/40">
+        Platinum VIP access — we do not represent the builder.
+      </p>
+    )
+  }
+</form>
+
+<script>
+  import {
+    submitLead,
+    validateEmail,
+    validatePhone,
+    normalizePhone,
+  } from '../utils/form';
+
+  function initForm(form: HTMLFormElement) {
+    const formType = form.dataset.formType || 'default';
+    const submitBtn = form.querySelector('[data-submit-btn]') as HTMLButtonElement;
+    const submitText = form.querySelector('[data-submit-text]');
+    const submitLoading = form.querySelector('[data-submit-loading]');
+    const formError = form.querySelector('[id$="-form-error"]') as HTMLElement;
+
+    function showFieldError(name: string, message: string) {
+      const input = form.querySelector(`[name="${name}"]`) as HTMLInputElement;
+      const errId = input?.getAttribute('aria-describedby');
+      const errEl = errId ? document.getElementById(errId) : null;
+      if (errEl) {
+        errEl.textContent = message;
+        errEl.classList.remove('hidden');
+      }
+      input?.setAttribute('aria-invalid', 'true');
+    }
+
+    function clearErrors() {
+      form.querySelectorAll('[role="alert"]').forEach((el) => {
+        if (el.id.endsWith('-error')) {
+          el.textContent = '';
+          el.classList.add('hidden');
+        }
+      });
+      form.querySelectorAll('[aria-invalid]').forEach((el) => el.removeAttribute('aria-invalid'));
+      formError?.classList.add('hidden');
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      clearErrors();
+
+      const fd = new FormData(form);
+      const firstName = (fd.get('firstName') as string)?.trim();
+      const lastName = (fd.get('lastName') as string)?.trim();
+      const email = (fd.get('email') as string)?.trim();
+      const phone = (fd.get('phone') as string)?.trim();
+      const isBroker = (fd.get('isBroker') as string) || undefined;
+
+      let valid = true;
+      if (!firstName) {
+        showFieldError('firstName', 'First name is required.');
+        valid = false;
+      }
+      if (!lastName) {
+        showFieldError('lastName', 'Last name is required.');
+        valid = false;
+      }
+      if (!email || !validateEmail(email)) {
+        showFieldError('email', 'Enter a valid email address.');
+        valid = false;
+      }
+      if (!phone || !validatePhone(phone)) {
+        showFieldError('phone', 'Enter a valid 10-digit phone number.');
+        valid = false;
+      }
+      if (!isBroker) {
+        const errEl = document.getElementById(`${form.id}-broker-error`);
+        if (errEl) {
+          errEl.textContent = 'Please select Yes or No.';
+          errEl.classList.remove('hidden');
+        }
+        valid = false;
+      }
+      if (!valid) return;
+
+      submitBtn.disabled = true;
+      submitText?.classList.add('hidden');
+      submitLoading?.classList.remove('hidden');
+
+      try {
+        await submitLead(
+          {
+            firstName,
+            lastName,
+            email,
+            phone: normalizePhone(phone),
+            isBroker,
+          },
+          formType,
+        );
+        const params = new URLSearchParams(window.location.search);
+        params.set('registered', '1');
+        window.location.href = `/thank-you/?${params.toString()}`;
+      } catch (err) {
+        const msg = err instanceof Error ? err.message : 'Something went wrong. Please try again.';
+        if (formError) {
+          formError.textContent = msg;
+          formError.classList.remove('hidden');
+        }
+        console.error('[LeadForm]', err);
+      } finally {
+        submitBtn.disabled = false;
+        submitText?.classList.remove('hidden');
+        submitLoading?.classList.add('hidden');
+      }
+    });
+  }
+
+  document.querySelectorAll('[data-lead-form]').forEach((form) => {
+    initForm(form as HTMLFormElement);
+  });
+
+  document.addEventListener('astro:page-load', () => {
+    document.querySelectorAll('[data-lead-form]').forEach((form) => {
+      if (!(form as HTMLFormElement).dataset.initialized) {
+        (form as HTMLFormElement).dataset.initialized = 'true';
+        initForm(form as HTMLFormElement);
+      }
+    });
+  });
+</script>

@@ -1,0 +1,61 @@
+---
+import LeadForm from './LeadForm.astro';
+---
+
+<dialog
+  id="exit-intent-modal"
+  class="fixed inset-0 z-[70] m-auto max-h-[90vh] w-[calc(100%-2rem)] max-w-lg overflow-y-auto border-0 bg-snow p-0 shadow-2xl backdrop:bg-midnight/80"
+  aria-labelledby="exit-intent-title"
+>
+  <div class="border-b border-stone-dark bg-midnight px-6 py-6 text-white">
+    <div class="flex items-start justify-between gap-4">
+      <div>
+        <span class="label-tag-light">Before You Go</span>
+        <h2 id="exit-intent-title" class="mt-4 font-display text-3xl font-semibold">
+          Get the VIP Price List
+        </h2>
+      </div>
+      <button type="button" class="min-h-11 min-w-11 text-white hover:text-terracotta" data-close-exit aria-label="Close">✕</button>
+    </div>
+  </div>
+  <div class="p-6 sm:p-8">
+    <p class="mb-6 text-sm text-slate">
+      VIP registrants receive Hawthorne East Village pricing, floor plans, and incentive details before public release.
+    </p>
+    <LeadForm id="exit-form" variant="inline" formType="exit-intent" />
+  </div>
+</dialog>
+
+<script>
+  const STORAGE_KEY = 'hev_exit_intent_shown';
+
+  function initExitIntent() {
+    if (sessionStorage.getItem(STORAGE_KEY)) return;
+    if (!window.matchMedia('(min-width: 768px)').matches) return;
+
+    const dialog = document.getElementById('exit-intent-modal') as HTMLDialogElement;
+    if (!dialog) return;
+
+    let triggered = false;
+
+    const show = () => {
+      if (triggered || sessionStorage.getItem(STORAGE_KEY)) return;
+      triggered = true;
+      sessionStorage.setItem(STORAGE_KEY, '1');
+      dialog.showModal();
+    };
+
+    document.addEventListener('mouseout', (e) => {
+      const ev = e as MouseEvent;
+      if (ev.clientY <= 0 && ev.relatedTarget === null) show();
+    });
+
+    document.querySelector('[data-close-exit]')?.addEventListener('click', () => dialog.close());
+    dialog.addEventListener('click', (e) => {
+      if (e.target === dialog) dialog.close();
+    });
+  }
+
+  initExitIntent();
+  document.addEventListener('astro:page-load', initExitIntent);
+</script>

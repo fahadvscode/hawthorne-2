@@ -1,0 +1,103 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import FAQSection from '../../components/FAQSection.astro';
+import CTABand from '../../components/CTABand.astro';
+import GatedDownload from '../../components/GatedDownload.astro';
+import { pages } from '../../data/seo';
+import { floorPlanFaqs } from '../../data/faqs';
+import { PROJECT } from '../../data/project';
+import { faqSchema } from '../../utils/schema';
+
+const seo = pages.floorPlans;
+
+const gallery = [
+  { name: 'Village Townhome A', beds: '2–3 bed', size: '1,348–1,550 sq ft' },
+  { name: 'Village Townhome B', beds: '3–4 bed', size: '1,550–1,800 sq ft' },
+  { name: 'Rear Lane Townhome', beds: '3–4 bed', size: '1,500–2,000 sq ft' },
+  { name: 'Detached 34\'', beds: '3–4 bed', size: '1,800–2,200 sq ft' },
+  { name: 'Detached 38\'', beds: '4–5 bed', size: '2,200–2,777 sq ft' },
+  { name: 'Detached 40\'', beds: '4–5 bed', size: '2,400–2,777 sq ft' },
+];
+---
+
+<BaseLayout
+  title={seo.title}
+  description={seo.description}
+  path={seo.path}
+  ogImage={seo.ogImage}
+  schemas={[faqSchema(floorPlanFaqs)]}
+>
+  <PageHero
+    h1={seo.h1}
+    tag="Mattamy Homes · Milton"
+    num="FP"
+    crumbs={[{ name: 'Floor Plans', path: '/floor-plans/' }]}
+    description={`Hawthorne East Village floor plans range from approximately ${PROJECT.sizes.min.toLocaleString()} to ${PROJECT.sizes.max.toLocaleString()} square feet across townhome and detached home types by Mattamy Homes in Milton. Last updated ${PROJECT.lastUpdated}.`}
+  />
+
+  <section class="section-pad">
+    <div class="container-narrow">
+      <h2 class="mb-8 text-2xl text-forest-dark">Home Types & Size Ranges</h2>
+      <div class="grid gap-6 md:grid-cols-2">
+        {
+          PROJECT.homeTypes.map((ht) => (
+            <article class="rounded-lg border border-forest-mid/15 bg-white p-6">
+              <h3 class="text-xl text-forest-dark">{ht.name}</h3>
+              <p class="mt-2 text-sm text-forest-mid">{ht.description}</p>
+              <dl class="mt-4 grid grid-cols-2 gap-2 text-sm">
+                <dt class="font-semibold">Bedrooms</dt>
+                <dd>{ht.beds}</dd>
+                <dt class="font-semibold">Bathrooms</dt>
+                <dd>{ht.baths}</dd>
+                <dt class="font-semibold">Size</dt>
+                <dd>
+                  {ht.sizeMin.toLocaleString()} – {ht.sizeMax.toLocaleString()} sq ft
+                </dd>
+              </dl>
+            </article>
+          ))
+        }
+      </div>
+      <div class="mt-10">
+        <GatedDownload
+          buttonLabel="Download All Floor Plans"
+          modalTitle="Hawthorne East Village Floor Plans"
+          formType="floor-plans"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="section-pad bg-white">
+    <div class="container-narrow">
+      <h2 class="mb-6 text-2xl text-forest-dark">Floor Plan Gallery</h2>
+      <p class="mb-8 text-sm text-forest-mid">Illustrative models — confirm current availability at VIP registration.</p>
+      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          gallery.map((plan, i) => (
+            <figure class="overflow-hidden rounded-lg border border-forest-mid/15">
+              <img
+                src={i < 2 ? "/images/1780773913253_townhomes.jpg" : i === 2 ? "/images/1780773913252_townhomes_3_storey.jpeg" : "/images/1780773913251_2_car_garage_detached.webp"}
+                alt={`Hawthorne East Village Milton ${plan.name} floor plan placeholder by Mattamy Homes`}
+                width={400}
+                height={260}
+                loading="lazy"
+                class="h-40 w-full object-cover"
+              />
+              <figcaption class="p-4">
+                <p class="font-semibold text-forest-dark">{plan.name}</p>
+                <p class="text-sm text-forest-mid">
+                  {plan.beds} · {plan.size}
+                </p>
+              </figcaption>
+            </figure>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <FAQSection faqs={floorPlanFaqs} heading="Floor Plan FAQ" id="floor-plans-faq" />
+  <CTABand />
+</BaseLayout>

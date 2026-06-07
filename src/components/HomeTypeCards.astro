@@ -1,0 +1,108 @@
+---
+import { PROJECT, formatPrice } from '../data/project';
+
+const cards = [
+  {
+    title: 'Village Townhomes',
+    tag: 'Freehold',
+    desc: 'Freehold village-style townhomes with classic front-street appeal and family-sized layouts.',
+    href: '/townhomes/',
+    price: PROJECT.homeTypes[0].priceFrom,
+    size: '1,348–1,800 sq ft',
+    beds: PROJECT.homeTypes[0].beds,
+    baths: PROJECT.homeTypes[0].baths,
+    image: '/images/1780773913253_townhomes.jpg',
+    alt: 'Hawthorne East Village Milton freehold village townhome elevation by Mattamy Homes',
+  },
+  {
+    title: 'Rear Lane Townhomes',
+    tag: 'Rear Lane',
+    desc: 'Three-storey common-element rear lane townhomes with private rear garage access.',
+    href: '/townhomes/',
+    price: PROJECT.homeTypes[1].priceFrom,
+    size: '1,500–2,000 sq ft',
+    beds: PROJECT.homeTypes[1].beds,
+    baths: PROJECT.homeTypes[1].baths,
+    image: '/images/1780773913252_townhomes_3_storey.jpeg',
+    alt: 'Hawthorne East Village Milton rear lane townhome by Mattamy Homes',
+  },
+  {
+    title: 'Detached Homes',
+    tag: 'Detached',
+    desc: 'Single and double-car garage detached homes — premium finishes up to 2,777 sq ft.',
+    href: '/detached/',
+    price: PROJECT.homeTypes[2].priceFrom,
+    size: '1,800–2,777 sq ft',
+    beds: `${PROJECT.homeTypes[2].beds} / ${PROJECT.homeTypes[3].beds}`,
+    baths: `${PROJECT.homeTypes[2].baths} / ${PROJECT.homeTypes[3].baths}`,
+    image: '/images/1780773913251_2_car_garage_detached.webp',
+    alt: 'Hawthorne East Village Milton detached home elevation by Mattamy Homes',
+  },
+];
+---
+
+<section class="bg-midnight py-24 sm:py-32" aria-labelledby="home-types-heading">
+  <div class="container-wide mb-12 px-5 sm:px-8">
+    <div class="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+      <div>
+        <span class="label-tag-light">Home Collections</span>
+        <h2 id="home-types-heading" class="mt-5 text-white">
+          Hawthorne East Village Home Types
+        </h2>
+      </div>
+      <p class="max-w-md text-sm leading-relaxed text-white/60">
+        Freehold village townhomes, rear lane townhomes, and detached homes — all by Mattamy Homes in Milton, Ontario.
+      </p>
+    </div>
+  </div>
+
+  <div class="scroll-strip px-5 sm:px-8">
+    {
+      cards.map((card, i) => (
+        <article class="group w-[85vw] max-w-[380px] border border-white/15 bg-midnight-soft sm:w-[340px]">
+          <div class="relative aspect-[3/4] overflow-hidden">
+            <img
+              src={card.image}
+              alt={card.alt}
+              width={380}
+              height={507}
+              loading="lazy"
+              class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-midnight via-transparent to-transparent"></div>
+            <span class="absolute left-4 top-4 label-tag-light">{card.tag}</span>
+            <div class="absolute bottom-0 left-0 right-0 p-5">
+              <p class="text-[10px] font-bold uppercase tracking-[0.25em] text-terracotta">From {formatPrice(card.price)}*</p>
+              <h3 class="mt-1 font-display text-2xl font-semibold text-white">{card.title}</h3>
+            </div>
+          </div>
+          <div class="border-t border-white/10 p-5">
+            <p class="text-sm leading-relaxed text-white/65">{card.desc}</p>
+            <dl class="mt-4 grid grid-cols-3 gap-2 border-t border-white/10 pt-4 text-center">
+              <div>
+                <dt class="text-[9px] font-bold uppercase tracking-[0.2em] text-terracotta">Size</dt>
+                <dd class="mt-1 text-[11px] font-medium text-white/80">{card.size}</dd>
+              </div>
+              <div>
+                <dt class="text-[9px] font-bold uppercase tracking-[0.2em] text-terracotta">Beds</dt>
+                <dd class="mt-1 text-[11px] font-medium text-white/80">{card.beds}</dd>
+              </div>
+              <div>
+                <dt class="text-[9px] font-bold uppercase tracking-[0.2em] text-terracotta">Baths</dt>
+                <dd class="mt-1 text-[11px] font-medium text-white/80">{card.baths}</dd>
+              </div>
+            </dl>
+            <a
+              href={card.href}
+              class="mt-5 inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-terracotta hover:text-white"
+            >
+              View details <span aria-hidden="true">→</span>
+            </a>
+          </div>
+        </article>
+      ))
+    }
+  </div>
+
+  <p class="container-wide mt-6 px-5 text-xs text-white/40 sm:px-8">*Starting from, subject to change. E&OE.</p>
+</section>
