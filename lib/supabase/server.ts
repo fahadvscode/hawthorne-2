@@ -20,18 +20,44 @@ export type LeadInsert = {
 };
 
 function getSupabaseUrl() {
-  return process.env.SUPABASE_URL ?? '';
+  return (process.env.SUPABASE_URL ?? '').trim();
+}
+
+function getServiceRoleKey() {
+  return (process.env.SUPABASE_SERVICE_ROLE_KEY ?? '').trim();
+}
+
+/** Detect anon key misconfigured as service role (common cause of RLS insert failures). */
+function getJwtRole(key: string): string | null {
+  try {
+    const segment = key.split('.')[1];
+    if (!segment) return null;
+    const payload = JSON.parse(Buffer.from(segment, 'base64url').toString('utf8')) as {
+      role?: string;
+    };
+    return payload.role ?? null;
+  } catch {
+    return null;
+  }
 }
 
 export function isSupabaseConfigured() {
-  return Boolean(getSupabaseUrl() && process.env.SUPABASE_SERVICE_ROLE_KEY);
+  return Boolean(getSupabaseUrl() && getServiceRoleKey());
 }
 
 export function createSupabaseAdmin(): SupabaseClient | null {
   const url = getSupabaseUrl();
-  const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  const serviceRoleKey = getServiceRoleKey();
 
   if (!url || !serviceRoleKey) {
+    return null;
+  }
+
+  const role = getJwtRole(serviceRoleKey);
+  if (role && role !== 'service_role') {
+    console.error(
+      `[supabase] SUPABASE_SERVICE_ROLE_KEY has JWT role "${role}" — use the service_role key from Supabase → Settings → API, not the anon key.`,
+    );
     return null;
   }
 

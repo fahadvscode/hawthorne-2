@@ -89,6 +89,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     });
 
     if (!saved.ok) {
+      console.error('[registration] Supabase insert failed:', saved.error);
       return res.status(500).json({
         error: 'Could not save your registration. Please try again shortly.',
       });
