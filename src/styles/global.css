@@ -125,6 +125,12 @@
     @apply not-italic text-terracotta;
   }
 
+  /* Hero headline — overrides base h1 midnight color on dark backgrounds */
+  .hero-headline {
+    @apply font-display text-5xl font-semibold leading-[0.95] tracking-tight text-white sm:text-6xl lg:text-7xl xl:text-8xl;
+    text-shadow: 0 2px 24px rgba(11, 18, 32, 0.6);
+  }
+
   .card-elevated {
     @apply border border-stone-dark bg-white;
   }
