@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.hawthorneeastvillagemilton.com/sitemap.xml
+Sitemap: https://www.hawthorneeast-village.com/sitemap.xml

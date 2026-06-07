@@ -60,7 +60,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     email: email.trim().toLowerCase(),
     phone: phone.trim(),
     isBroker: isBroker?.trim() ?? '',
-    source: source?.trim() || 'hawthorneeastvillagemilton.com',
+    source: source?.trim() || 'hawthorneeast-village.com',
     page_path: page_path?.trim() || '/',
     form_type: form_type?.trim() || 'hero',
     utm_source: utm_source?.trim() ?? '',

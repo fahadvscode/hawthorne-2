@@ -48,7 +48,7 @@ export async function submitLead(
   const payload: LeadPayload = {
     ...data,
     ...getUtmParams(),
-    source: 'hawthorneeastvillagemilton.com',
+    source: 'hawthorneeast-village.com',
     page_path: window.location.pathname,
     timestamp: new Date().toISOString(),
     form_type: formType,

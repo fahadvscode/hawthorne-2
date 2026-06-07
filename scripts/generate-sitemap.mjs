@@ -1,7 +1,7 @@
 import { readdir, stat, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 
-const SITE = 'https://www.hawthorneeastvillagemilton.com';
+const SITE = 'https://www.hawthorneeast-village.com';
 const PAGES_DIR = 'src/pages';
 const OUTPUT = 'public/sitemap.xml';
 const EXCLUDED = new Set(['thank-you']);
