@@ -9,66 +9,74 @@ interface Props {
 }
 
 const { h1, subtitle, showForm = true } = Astro.props;
+
+const headlineParts = h1.includes('—')
+  ? { main: h1.split('—')[0].trim(), accent: h1.split('—').slice(1).join('—').trim() }
+  : { main: h1, accent: null };
 ---
 
-<section class="relative min-h-[100svh] bg-midnight">
-  <!-- Background image (left / full width on mobile) -->
-  <div class="absolute inset-0 lg:right-[420px]" aria-hidden="true">
-    <img
-      src="/images/1780773913252_hero_community_picture.webp"
-      alt="Hawthorne East Village Milton new home community by Mattamy Homes pre-construction"
-      width={1920}
-      height={1080}
-      loading="eager"
-      fetchpriority="high"
-      decoding="async"
-      class="h-full w-full object-cover"
-    />
-  </div>
+<section class="relative overflow-hidden bg-white">
+  <!-- Brand accent strip -->
+  <div class="h-1.5 w-full bg-brand" aria-hidden="true"></div>
 
-  <!-- Scrim — darkens image so headline stays readable -->
-  <div
-    class="pointer-events-none absolute inset-0 lg:right-[420px] bg-gradient-to-t from-midnight from-30% via-midnight/90 to-midnight/70 lg:bg-gradient-to-r lg:from-midnight/95 lg:via-midnight/85 lg:to-midnight/50"
-    aria-hidden="true"
-  ></div>
+  <div class="container-wide">
+    <div class="grid min-h-[calc(100svh-6px)] lg:grid-cols-12 lg:gap-0">
+      <!-- Left: copy on white -->
+      <div class="flex flex-col justify-center px-5 py-12 sm:px-8 lg:col-span-5 lg:py-20 lg:pr-12">
+        <span class="label-tag mb-6 w-fit">Pre-Construction · Milton, ON</span>
 
-  <div class="relative z-10 flex min-h-[100svh] flex-col lg:flex-row">
-    <!-- Left: headline -->
-    <div class="relative flex flex-1 flex-col justify-end">
-      <!-- Extra bottom scrim behind text block -->
-      <div
-        class="pointer-events-none absolute inset-x-0 bottom-0 top-1/4 bg-gradient-to-t from-midnight via-midnight/95 to-transparent lg:top-0 lg:bg-gradient-to-r lg:from-midnight/90 lg:via-midnight/75 lg:to-transparent"
-        aria-hidden="true"
-      ></div>
-
-      <div class="relative z-10 px-5 pb-10 pt-28 sm:px-8 sm:pb-14 lg:px-12 lg:pb-16">
-        <span class="label-tag-light mb-6 w-fit">Pre-Construction · Milton, ON</span>
-
-        <h1 class="hero-headline max-w-4xl">
-          {h1}
+        <h1 class="hero-headline">
+          {headlineParts.main}
+          {headlineParts.accent && (
+            <>
+              <span class="block mt-2 text-brand">{headlineParts.accent}</span>
+            </>
+          )}
         </h1>
 
-        <p class="mt-6 max-w-xl text-base leading-relaxed text-white/85 sm:text-lg">
+        <p class="mt-6 max-w-lg text-base leading-relaxed text-slate sm:text-lg">
           {subtitle}
         </p>
 
-        <div class="mt-10 flex flex-wrap gap-8 border-t border-white/25 pt-8">
-          <div>
-            <p class="text-[10px] font-bold uppercase tracking-[0.25em] text-terracotta">Starting</p>
-            <p class="mt-1 font-display text-4xl font-semibold text-white">{formatPrice(PROJECT.priceRange.low)}</p>
+        <dl class="mt-10 grid grid-cols-3 gap-4">
+          <div class="rounded-xl border border-brand/20 bg-brand-soft px-3 py-4 text-center sm:px-4">
+            <dt class="text-[9px] font-bold uppercase tracking-[0.2em] text-brand sm:text-[10px]">From</dt>
+            <dd class="mt-1 font-display text-lg font-semibold text-charcoal sm:text-xl">
+              {formatPrice(PROJECT.priceRange.low)}
+            </dd>
           </div>
-          <div>
-            <p class="text-[10px] font-bold uppercase tracking-[0.25em] text-terracotta">Sizes</p>
-            <p class="mt-1 font-display text-4xl font-semibold text-white">
-              {PROJECT.sizes.min.toLocaleString()}–{PROJECT.sizes.max.toLocaleString()}
-              <span class="text-lg text-white/70"> sq ft</span>
-            </p>
+          <div class="rounded-xl border border-brand/20 bg-brand-soft px-3 py-4 text-center sm:px-4">
+            <dt class="text-[9px] font-bold uppercase tracking-[0.2em] text-brand sm:text-[10px]">Sizes</dt>
+            <dd class="mt-1 font-display text-lg font-semibold text-charcoal sm:text-xl">
+              {PROJECT.sizes.min.toLocaleString()}+
+            </dd>
           </div>
-          <div>
-            <p class="text-[10px] font-bold uppercase tracking-[0.25em] text-terracotta">Builder</p>
-            <p class="mt-1 font-display text-4xl font-semibold text-white">Mattamy</p>
+          <div class="rounded-xl border border-brand/20 bg-brand-soft px-3 py-4 text-center sm:px-4">
+            <dt class="text-[9px] font-bold uppercase tracking-[0.2em] text-brand sm:text-[10px]">Builder</dt>
+            <dd class="mt-1 font-display text-lg font-semibold text-charcoal sm:text-xl">Mattamy</dd>
           </div>
-        </div>
+        </dl>
+
+        <ul class="mt-8 space-y-3 text-sm text-slate">
+          <li class="flex items-center gap-3">
+            <span class="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-brand text-white">
+              <svg class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+            </span>
+            Freehold townhomes & detached homes
+          </li>
+          <li class="flex items-center gap-3">
+            <span class="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-brand text-white">
+              <svg class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+            </span>
+            Priority pricing & floor plans
+          </li>
+          <li class="flex items-center gap-3">
+            <span class="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-brand text-white">
+              <svg class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+            </span>
+            Exclusive VIP incentives
+          </li>
+        </ul>
 
         {
           !showForm && (
@@ -78,25 +86,42 @@ const { h1, subtitle, showForm = true } = Astro.props;
           )
         }
       </div>
-    </div>
 
-    <!-- Right: form sidebar -->
-    {
-      showForm && (
-        <aside class="relative z-10 w-full border-t border-white/10 bg-midnight-soft lg:w-[420px] lg:shrink-0 lg:border-l lg:border-t-0">
-          <div class="flex h-full flex-col justify-center px-6 py-10 sm:px-8 lg:py-0">
-            <div class="mb-8 border-l-4 border-terracotta pl-5">
-              <p class="text-[10px] font-bold uppercase tracking-[0.25em] text-terracotta">VIP Registration</p>
-              <h2 class="mt-2 font-display text-3xl font-semibold text-white">
-                Floor Plans & Pricing
-              </h2>
-              <p class="mt-2 text-sm text-white/70">Delivered to your inbox instantly.</p>
+      <!-- Right: image + floating form -->
+      <div class="relative lg:col-span-7">
+        <div class="relative h-[45vh] min-h-[320px] lg:absolute lg:inset-0 lg:h-auto">
+          <img
+            src="/images/1780773913252_hero_community_picture.webp"
+            alt="Hawthorne East Village Milton new home community by Mattamy Homes pre-construction"
+            width={1920}
+            height={1080}
+            loading="eager"
+            fetchpriority="high"
+            decoding="async"
+            class="h-full w-full object-cover lg:rounded-bl-[3rem]"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-brand-darker/50 via-transparent to-transparent lg:bg-gradient-to-l lg:from-transparent lg:via-transparent lg:to-white/20" aria-hidden="true"></div>
+          <div class="absolute bottom-0 left-0 right-0 h-1 bg-brand lg:hidden" aria-hidden="true"></div>
+        </div>
+
+        {
+          showForm && (
+            <div class="relative z-10 mx-5 -mt-10 mb-10 sm:mx-8 lg:absolute lg:bottom-10 lg:left-8 lg:right-8 lg:mx-0 lg:mb-0 lg:max-w-md lg:ml-auto">
+              <div class="card-elevated overflow-hidden">
+                <div class="bg-brand px-6 py-4 text-white">
+                  <p class="text-[10px] font-bold uppercase tracking-[0.22em] text-white/80">VIP Registration</p>
+                  <h2 class="mt-1 font-display text-2xl font-semibold">Floor Plans & Pricing</h2>
+                  <p class="mt-1 text-sm text-white/80">Delivered to your inbox instantly.</p>
+                </div>
+                <div class="bg-white px-6 py-6 sm:px-7 sm:py-7">
+                  <LeadForm id="hero-form" variant="inline" formType="hero" />
+                </div>
+              </div>
             </div>
-            <LeadForm id="hero-form" variant="hero" formType="hero" />
-          </div>
-        </aside>
-      )
-    }
+          )
+        }
+      </div>
+    </div>
   </div>
 </section>
 

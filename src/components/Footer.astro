@@ -17,12 +17,12 @@ const homeTypes = [
 ];
 ---
 
-<footer class="bg-midnight text-white/70">
+<footer class="bg-brand-darker text-white/80">
   <div class="container-wide section-pad">
-    <div class="grid gap-12 border-b border-white/10 pb-12 lg:grid-cols-12">
+    <div class="grid gap-12 border-b border-white/15 pb-12 lg:grid-cols-12">
       <div class="lg:col-span-5">
         <p class="font-display text-4xl font-semibold text-white">{PROJECT.name}</p>
-        <p class="mt-2 text-[10px] font-bold uppercase tracking-[0.25em] text-terracotta">
+        <p class="mt-2 text-[10px] font-bold uppercase tracking-[0.25em] text-white/60">
           {PROJECT.city}, {PROJECT.province} · Pre-Construction
         </p>
         <p class="mt-6 max-w-sm text-sm leading-relaxed">
@@ -31,35 +31,37 @@ const homeTypes = [
       </div>
 
       <div class="lg:col-span-3">
-        <p class="mb-5 text-[10px] font-bold uppercase tracking-[0.25em] text-terracotta">Explore</p>
+        <p class="mb-5 text-[10px] font-bold uppercase tracking-[0.25em] text-white/50">Explore</p>
         <ul class="space-y-3 text-sm">
           {explore.map((link) => (
             <li>
-              <a href={link.href} class="transition-colors hover:text-terracotta">{link.label}</a>
+              <a href={link.href} class="transition-colors hover:text-white">{link.label}</a>
             </li>
           ))}
         </ul>
       </div>
 
       <div class="lg:col-span-2">
-        <p class="mb-5 text-[10px] font-bold uppercase tracking-[0.25em] text-terracotta">Home Types</p>
+        <p class="mb-5 text-[10px] font-bold uppercase tracking-[0.25em] text-white/50">Home Types</p>
         <ul class="space-y-3 text-sm">
           {homeTypes.map((link) => (
             <li>
-              <a href={link.href} class="transition-colors hover:text-terracotta">{link.label}</a>
+              <a href={link.href} class="transition-colors hover:text-white">{link.label}</a>
             </li>
           ))}
         </ul>
       </div>
 
       <div class="lg:col-span-2">
-        <p class="mb-5 text-[10px] font-bold uppercase tracking-[0.25em] text-terracotta">Contact</p>
+        <p class="mb-5 text-[10px] font-bold uppercase tracking-[0.25em] text-white/50">Contact</p>
         <address class="not-italic text-sm leading-relaxed">
           <p class="font-semibold text-white">{CONTACT.name}</p>
           <p class="mt-1">{CONTACT.brokerage}</p>
           <p>{CONTACT.address}</p>
         </address>
-        <a href="/register/" class="btn-gold mt-6 text-[10px]">Register</a>
+        <a href="/register/" class="mt-6 inline-flex min-h-11 items-center justify-center bg-white px-6 py-2.5 text-[10px] font-bold uppercase tracking-[0.2em] text-brand transition-colors hover:bg-brand-light">
+          Register
+        </a>
       </div>
     </div>
 

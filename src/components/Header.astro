@@ -11,8 +11,8 @@ const nav = [
 const currentPath = Astro.url.pathname;
 ---
 
-<header class="sticky top-0 z-50 border-b border-stone-dark bg-snow/95 backdrop-blur-sm">
-  <div class="container-wide grid grid-cols-[1fr_auto_1fr] items-center gap-4 px-5 py-5 sm:px-8">
+<header class="sticky top-0 z-50 border-b border-stone-dark bg-white/95 backdrop-blur-sm">
+  <div class="container-wide grid grid-cols-[1fr_auto_1fr] items-center gap-4 px-5 py-4 sm:px-8">
     <a href="/" class="flex items-center gap-3" aria-label="Hawthorne East Village Milton — Home">
       <img
         src="/images/1780773913252_Hawthrone-East-Village-logo.webp"
@@ -21,7 +21,7 @@ const currentPath = Astro.url.pathname;
         width={40}
         height={40}
       />
-      <span class="hidden font-display text-xl font-semibold text-midnight sm:block">
+      <span class="hidden font-display text-xl font-semibold text-charcoal sm:block">
         Hawthorne East Village
       </span>
     </a>
@@ -34,8 +34,8 @@ const currentPath = Astro.url.pathname;
             class:list={[
               'text-[11px] font-bold uppercase tracking-[0.2em] transition-colors',
               currentPath.startsWith(item.href)
-                ? 'text-terracotta'
-                : 'text-slate hover:text-midnight',
+                ? 'text-brand'
+                : 'text-slate hover:text-brand',
             ]}
           >
             {item.label}
