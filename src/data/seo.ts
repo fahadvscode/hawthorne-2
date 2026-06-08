@@ -6,14 +6,14 @@ export interface PageSEO {
   ogImage?: string;
 }
 
-const CTA = 'Register for VIP pricing & floor plans.';
+const CTA = 'Free VIP registration for pricing, floor plans & incentives.';
+const LOC = 'Milton, Ontario (Halton Region)';
 
 export const pages: Record<string, PageSEO> = {
   home: {
-    title: 'Hawthorne East Village Milton | Mattamy Pre-Construction',
+    title: 'Hawthorne East Village Milton | Mattamy Homes Pre-Construction',
     description:
-      'Hawthorne East Village Milton by Mattamy Homes — townhomes & detached from $719,990. VIP pricing, floor plans & incentives. ' +
-      CTA,
+      `Hawthorne East Village is a new Mattamy Homes pre-construction community in ${LOC}. Townhomes & detached homes from $719,990, 1,348–2,777 sq ft. ${CTA}`,
     path: '/',
     h1: 'Hawthorne East Village Milton — Mattamy Homes Pre-Construction',
     ogImage: '/images/og-home.jpg',
@@ -55,10 +55,9 @@ export const pages: Record<string, PageSEO> = {
     ogImage: '/images/og-detached.jpg',
   },
   location: {
-    title: 'Hawthorne East Village Location | Milton ON',
+    title: 'Hawthorne East Village Location | Milton ON Map & Schools',
     description:
-      'Hawthorne East Village location — Hwy 401/407, Milton GO, schools & Milton Education Village. Map & lifestyle guide. ' +
-      CTA,
+      `Hawthorne East Village is in ${LOC} at Fourth Line & Louis St. Laurent Ave. Hwy 401 (10 min), Hwy 407 (7 min), Milton GO (8 min), top schools & Milton Education Village. ${CTA}`,
     path: '/location/',
     h1: 'Hawthorne East Village Location & Milton Lifestyle',
     ogImage: '/images/og-location.jpg',

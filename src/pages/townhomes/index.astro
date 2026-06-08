@@ -2,12 +2,21 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHero from '../../components/PageHero.astro';
 import CTABand from '../../components/CTABand.astro';
+import FAQSection from '../../components/FAQSection.astro';
 import GatedDownload from '../../components/GatedDownload.astro';
 import { pages } from '../../data/seo';
+import { townhomeFaqs } from '../../data/faqs';
 import { PROJECT, formatPrice } from '../../data/project';
+import { faqSchema, productOffersSchema } from '../../utils/schema';
 ---
 
-<BaseLayout title={pages.townhomes.title} description={pages.townhomes.description} path={pages.townhomes.path} ogImage={pages.townhomes.ogImage}>
+<BaseLayout
+  title={pages.townhomes.title}
+  description={pages.townhomes.description}
+  path={pages.townhomes.path}
+  ogImage={pages.townhomes.ogImage}
+  schemas={[faqSchema(townhomeFaqs), ...productOffersSchema(['village-townhomes', 'rear-lane-townhomes'])]}
+>
   <PageHero
     h1={pages.townhomes.h1}
     tag="Freehold & Rear Lane · Milton"
@@ -67,6 +76,8 @@ import { PROJECT, formatPrice } from '../../data/project';
       <a href="/floor-plans/" class="btn-outline">View Floor Plans</a>
     </div>
   </section>
+
+  <FAQSection faqs={townhomeFaqs} heading="Hawthorne East Village Townhome FAQs" id="townhome-faq" />
 
   <CTABand />
 </BaseLayout>

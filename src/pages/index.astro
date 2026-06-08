@@ -10,7 +10,7 @@ import GatedDownload from '../components/GatedDownload.astro';
 import { pages } from '../data/seo';
 import { homeFaqs } from '../data/faqs';
 import { PROJECT, formatPrice } from '../data/project';
-import { faqSchema } from '../utils/schema';
+import { faqSchema, speakableSchema } from '../utils/schema';
 
 const seo = pages.home;
 ---
@@ -20,7 +20,7 @@ const seo = pages.home;
   description={seo.description}
   path={seo.path}
   ogImage={seo.ogImage}
-  schemas={[faqSchema(homeFaqs)]}
+  schemas={[faqSchema(homeFaqs), speakableSchema(seo.path)]}
 >
   <Hero
     h1={seo.h1}

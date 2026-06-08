@@ -2,11 +2,20 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHero from '../../components/PageHero.astro';
 import CTABand from '../../components/CTABand.astro';
+import FAQSection from '../../components/FAQSection.astro';
 import { pages } from '../../data/seo';
+import { locationFaqs } from '../../data/faqs';
 import { PROJECT } from '../../data/project';
+import { faqSchema } from '../../utils/schema';
 ---
 
-<BaseLayout title={pages.location.title} description={pages.location.description} path={pages.location.path} ogImage={pages.location.ogImage}>
+<BaseLayout
+  title={pages.location.title}
+  description={pages.location.description}
+  path={pages.location.path}
+  ogImage={pages.location.ogImage}
+  schemas={[faqSchema(locationFaqs)]}
+>
   <PageHero
     h1={pages.location.h1}
     tag="Halton Region · Milton, ON"
@@ -68,6 +77,8 @@ import { PROJECT } from '../../data/project';
       </div>
     </div>
   </section>
+
+  <FAQSection faqs={locationFaqs} heading="Hawthorne East Village Location FAQs" id="location-faq" />
 
   <CTABand />
 </BaseLayout>

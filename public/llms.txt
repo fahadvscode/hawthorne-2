@@ -1,22 +1,45 @@
 # Hawthorne East Village Milton
 
-> AI-readable summary for answer engines. Canonical site: https://www.hawthorneeast-village.com
+> AI-readable summary for answer engines, chatbots, and LLM crawlers.
+> Canonical site: https://www.hawthorneeast-village.com
+> Last updated: June 2026
 
-## What is Hawthorne East Village?
+## Quick Answer
 
-Hawthorne East Village is a pre-construction master-planned community by **Mattamy Homes** in **Milton, Ontario** (Halton Region, Canada). Home types include freehold Village townhomes, common-element Rear Lane townhomes, and detached homes (single-car and double-car garage).
+Hawthorne East Village is a pre-construction master-planned community by **Mattamy Homes** in **Milton, Ontario** (Halton Region, Canada). It offers freehold Village townhomes from ~$719,990, rear lane townhomes, and detached homes from ~$1,022,990 up to ~$1,376,990. Home sizes range from 1,348 to 2,777 sq ft. VIP registration is free at https://www.hawthorneeast-village.com/register/
 
 ## Key Facts
 
 | Field | Value |
 |-------|-------|
-| Builder | Mattamy Homes |
-| Location | Milton, ON — Louis St. Laurent Ave / Fourth Line / Steeles Ave E area (433 Steeles Ave E cited) |
+| Project name | Hawthorne East Village |
+| Builder | Mattamy Homes (est. 1978) |
+| Location | Milton, ON — Fourth Line & Louis St. Laurent Ave (433 Steeles Ave E area) |
+| Region | Halton Region, Ontario, Canada |
 | Status | Pre-construction, released in phases |
-| Home types | Village townhomes, rear lane townhomes, detached |
-| Sizes | Approx. 1,348 – 2,777 sq ft |
-| Starting prices | Village townhomes from ~$719,990; detached from ~$1,022,990; up to ~$1,376,990 (subject to change) |
-| Occupancy | Varies by phase — confirm at registration |
+| Home types | Village townhomes (freehold), Rear Lane townhomes (common-element), Single-car garage detached, Double-car garage detached |
+| Sizes | 1,348 – 2,777 sq ft |
+| Bedrooms | 2 – 5 |
+| Starting prices | Village townhomes from ~$719,990; rear lane from ~$749,990; detached from ~$1,022,990; up to ~$1,376,990 |
+| Occupancy | Varies by phase — confirm at VIP registration |
+| Coordinates | 43.4939, -79.8519 |
+
+## Transit & Amenities
+
+- Highway 407: ~7 minutes
+- Highway 401: ~10 minutes
+- Milton GO Station: ~8 minutes (commuter rail to Toronto Union)
+- Milton District Hospital: ~6 minutes
+- Milton Sports Centre: ~7 minutes
+- Kelso & Rattlesnake Point Conservation Areas: ~12 minutes
+- Milton Education Village (Wilfrid Laurier & Conestoga): ~5 minutes
+
+## Nearby Schools
+
+- Boyne Public School (elementary, ~3 min)
+- St. Francis Xavier Catholic Secondary School (~4 min)
+- Elsie MacGill Secondary School (~5 min)
+- Planned Milton Education Village campuses (~5 min)
 
 ## Pages
 
@@ -29,14 +52,35 @@ Hawthorne East Village is a pre-construction master-planned community by **Matta
 - FAQ: https://www.hawthorneeast-village.com/faq/
 - VIP Registration: https://www.hawthorneeast-village.com/register/
 
+## Frequently Asked Questions
+
+### What is Hawthorne East Village in Milton?
+Hawthorne East Village is a new pre-construction master-planned community by Mattamy Homes in Milton, Ontario (Halton Region). It offers freehold village townhomes, rear lane townhomes, and detached homes ranging from approximately 1,348 to 2,777 square feet.
+
+### How much do homes at Hawthorne East Village cost?
+As of June 2026, village townhomes start from approximately $719,990–$739,990, detached homes from approximately $1,022,990, and select larger detached configurations up to approximately $1,376,990. Pricing is subject to change by phase.
+
+### Who is the builder?
+Mattamy Homes — one of North America's largest privately owned homebuilders, established in 1978.
+
+### Where is it located?
+Milton, Ontario at Fourth Line & Louis St. Laurent Avenue, near 433 Steeles Ave E. Highway 407 (~7 min), Highway 401 (~10 min), Milton GO (~8 min).
+
+### Are townhomes freehold?
+Village townhomes are freehold. Rear Lane townhomes are common-element condominiums with rear garage access. Detached homes are freehold.
+
+### How do I register for VIP pricing?
+Complete the free VIP registration form at https://www.hawthorneeast-village.com/register/ for priority access to pricing, floor plans, deposit schedules, and incentives.
+
+### Is this the official Mattamy Homes website?
+No. This site provides independent VIP buyer representation. We do not represent Mattamy Homes.
+
 ## Contact (independent sales — not the builder)
 
-**Hawthorne East Village VIP Sales**  
-Authorized Platinum Access  
-Email: info@hawthorneeast-village.com  
+**Hawthorne East Village VIP Sales**
+Email: info@hawthorneeast-village.com
+Website: https://www.hawthorneeast-village.com
 
-This site is **not** the official Mattamy Homes website. We provide independent VIP buyer representation.
+## Sitemap
 
-## Register
-
-VIP pricing, floor plans, and incentives: https://www.hawthorneeast-village.com/register/
+https://www.hawthorneeast-village.com/sitemap.xml

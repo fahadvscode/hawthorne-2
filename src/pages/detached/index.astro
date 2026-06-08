@@ -2,12 +2,21 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHero from '../../components/PageHero.astro';
 import CTABand from '../../components/CTABand.astro';
+import FAQSection from '../../components/FAQSection.astro';
 import GatedDownload from '../../components/GatedDownload.astro';
 import { pages } from '../../data/seo';
+import { detachedFaqs } from '../../data/faqs';
 import { PROJECT, formatPrice } from '../../data/project';
+import { faqSchema, productOffersSchema } from '../../utils/schema';
 ---
 
-<BaseLayout title={pages.detached.title} description={pages.detached.description} path={pages.detached.path} ogImage={pages.detached.ogImage}>
+<BaseLayout
+  title={pages.detached.title}
+  description={pages.detached.description}
+  path={pages.detached.path}
+  ogImage={pages.detached.ogImage}
+  schemas={[faqSchema(detachedFaqs), ...productOffersSchema(['detached-single', 'detached-double'])]}
+>
   <PageHero
     h1={pages.detached.h1}
     tag="Single Family · Milton"
@@ -58,6 +67,8 @@ import { PROJECT, formatPrice } from '../../data/project';
       <a href="/prices/" class="btn-outline">View All Prices</a>
     </div>
   </section>
+
+  <FAQSection faqs={detachedFaqs} heading="Hawthorne East Village Detached Home FAQs" id="detached-faq" />
 
   <CTABand />
 </BaseLayout>

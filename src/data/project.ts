@@ -113,7 +113,7 @@ export const CONTACT = {
   title: 'Authorized Platinum Access',
   brokerage: 'Independent Real Estate Professionals',
   address: 'Milton, ON',
-  email: '',
+  email: 'info@hawthorneeast-village.com',
   phone: 'Register for Access',
   phoneTel: '#register',
   web: '',

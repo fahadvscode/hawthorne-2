@@ -6,6 +6,18 @@ const PAGES_DIR = 'src/pages';
 const OUTPUT = 'public/sitemap.xml';
 const EXCLUDED = new Set(['thank-you']);
 
+/** Priority and change frequency by route path */
+const ROUTE_META = {
+  '/': { priority: '1.0', changefreq: 'weekly' },
+  '/floor-plans/': { priority: '0.9', changefreq: 'weekly' },
+  '/prices/': { priority: '0.9', changefreq: 'weekly' },
+  '/townhomes/': { priority: '0.85', changefreq: 'weekly' },
+  '/detached/': { priority: '0.85', changefreq: 'weekly' },
+  '/location/': { priority: '0.8', changefreq: 'monthly' },
+  '/faq/': { priority: '0.8', changefreq: 'monthly' },
+  '/register/': { priority: '0.7', changefreq: 'monthly' },
+};
+
 async function findRoutes(dir, base = '') {
   const entries = await readdir(dir, { withFileTypes: true });
   const routes = [];
@@ -20,8 +32,10 @@ async function findRoutes(dir, base = '') {
     }
 
     if (entry.name === 'index.astro') {
+      const routePath = base === '' ? '/' : `${base}/`;
       routes.push({
         loc: base === '' ? `${SITE}/` : `${SITE}${base}/`,
+        path: routePath,
         file: path,
       });
     }
@@ -37,12 +51,17 @@ function toIsoDate(mtime) {
 function buildXml(routes) {
   const urls = routes
     .sort((a, b) => a.loc.localeCompare(b.loc))
-    .map(
-      ({ loc, lastmod }) => `  <url>
-    <loc>${loc}</loc>
-    <lastmod>${lastmod}</lastmod>
-  </url>`,
-    )
+    .map(({ loc, lastmod, priority, changefreq }) => {
+      const lines = [
+        `  <url>`,
+        `    <loc>${loc}</loc>`,
+        `    <lastmod>${lastmod}</lastmod>`,
+        `    <changefreq>${changefreq}</changefreq>`,
+        `    <priority>${priority}</priority>`,
+        `  </url>`,
+      ];
+      return lines.join('\n');
+    })
     .join('\n');
 
   return `<?xml version="1.0" encoding="UTF-8"?>
@@ -57,6 +76,9 @@ const routes = await findRoutes(PAGES_DIR);
 for (const route of routes) {
   const { mtime } = await stat(route.file);
   route.lastmod = toIsoDate(mtime);
+  const meta = ROUTE_META[route.path] ?? { priority: '0.5', changefreq: 'monthly' };
+  route.priority = meta.priority;
+  route.changefreq = meta.changefreq;
 }
 
 await writeFile(OUTPUT, buildXml(routes), 'utf8');

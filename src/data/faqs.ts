@@ -126,3 +126,33 @@ export const floorPlanFaqs = allFaqs.filter((f) =>
     'Is there a price list for Hawthorne East Village floor plans?',
   ].includes(f.question),
 );
+
+export const townhomeFaqs = allFaqs.filter((f) =>
+  [
+    'Are Hawthorne East Village townhomes freehold?',
+    'What is the difference between Village and Rear Lane townhomes?',
+    'What home types are available at Hawthorne East Village?',
+    'How much do homes at Hawthorne East Village cost?',
+    'How do I register for Hawthorne East Village VIP pricing?',
+  ].includes(f.question),
+);
+
+export const detachedFaqs = allFaqs.filter((f) =>
+  [
+    'What size are detached homes at Hawthorne East Village?',
+    'How much do homes at Hawthorne East Village cost?',
+    'What home types are available at Hawthorne East Village?',
+    'When is occupancy / move-in for Hawthorne East Village?',
+    'What incentives are available at Hawthorne East Village?',
+  ].includes(f.question),
+);
+
+export const locationFaqs = allFaqs.filter((f) =>
+  [
+    'Where exactly is Hawthorne East Village located?',
+    'What schools are near Hawthorne East Village?',
+    'How far is Hawthorne East Village from Toronto?',
+    'What amenities are near Hawthorne East Village?',
+    'What makes Milton attractive for new home buyers?',
+  ].includes(f.question),
+);
